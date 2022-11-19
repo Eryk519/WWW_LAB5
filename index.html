@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<title>Zółw morski</title>
+<head>
+	<script src="timedate.js" type = "text/javascript"></script>
+	<script src="kolorujto.js" type = "text/javascript"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="style.css">
+	<meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="Content-Language" content="pl" />
+	<meta name="Author" content="Jan Kowalski" />
+</head>
+
+<?php
+	$dbhost = 'localhost';
+	$dbuser = 'root';
+	$dbpass = '';
+	$baza_1 = 'moja_strona';
+	
+	$link = mysql_connect ($dbhost, $dbuser, $dbpass);
+	if (!$link) echo '<b>przerwane połączenie </b>';
+	if (!mysql_select_db($baza_1)) echo 'nie wybrano bazy';
+?>
+
+<?php
+function PokazPodstrone($id)
+{
+	$id_clear = htmlspecialchars($id);\
+		$squery = "SELECT * FROM page_list WHERE id= '$id-clear' LIMIT 1";
+			$row = mysql_fetch_array($result);
+			
+			if(empty($row['id']))
+			{
+				$web = '[nie_znaleziono_strony]'
+			}
+			else
+			{
+				$web = $row['page_content'};
+			}
+			
+		return $web;
+}
+
+?>		
+	
+<body onload="startclock()">
+
+
+<div id="animacjaTestowa1" class="test-block">Kliknij, a się powiększe</div>
+	<script>
+
+		$("#animacjaTestowa1").on("click", function (){
+			$(this).animate({
+				width: "500px",
+				opacity: 0.4,
+				fontSize: "3em",
+				borderWidth: "10px"
+			}, 1500);
+		});
+	</script>
+<div id="animacjaTestowa2" class="test-block">Najedź kursorem a się powiększe</div>
+<script>
+
+	$("#animacjaTestowa2").on({
+		"mouseover" : function () {
+			$(this).animate({
+				width: 300
+			}, 800);
+		},
+		"mouseout" : function () {
+			$(this).animate({
+				width: 200
+			}, 800);
+		}
+	});
+</script>
+
+
+<div id="animacjaTestowa3" class="test-block">Kliknij, abym urósł</div>
+<script>
+	$("#animacjaTestowa3").on("click", function(){
+		if (!$(this).is(":animated")) {
+			$(this).animate({
+				width: "+=" + 50,
+				height "+=" + 10,
+				opacity: "-=" + 0.1,
+				duration : 3000
+			});
+		}
+});
+</script>
+
+	<div id="zegarek"></div>
+	<div id="zegarek"></div>
+
+	<FORM METHOD="POST" NAME="BACKGROUND">
+		<INPUT TYPE ="button" VALUE ="żółty" ONCLICK="changeBacground('#FFF000')">
+		<INPUT TYPE ="button" VALUE ="czarny" ONCLICK="changeBacground('#000000')">
+		<INPUT TYPE ="button" VALUE ="biały" ONCLICK="changeBacground('#FFFFFF')">
+		<INPUT TYPE ="button" VALUE ="zielony" ONCLICK="changeBacground('#00FF00')">
+		<INPUT TYPE ="button" VALUE ="niebieski" ONCLICK="changeBacground('#0000FF')">
+		<INPUT TYPE ="button" VALUE ="pomarańczowy" ONCLICK="changeBacground('#FF8000')">
+		<INPUT TYPE ="button" VALUE ="szary" ONCLICK="changeBacground('#c0c0c0')">
+		<INPUT TYPE ="button" VALUE ="czerwony" ONCLICK="changeBacground('#FF0000')">
+
+
+
+
+<h1>Najlepsza strona o żółwiach morskich w internecie!</h1>
+
+<table
+border ="4";
+align="center";
+>
+  <tr>
+	<td> <a href="index.html">Strona Główna</a> </td>
+  <td> <a href="strona1/index.html">Zółw Wodny</a> </td>
+  <td> <a href="strona2/index.html">Galeria</a> </td>
+	<td> <a href="strona3/index.html">Przyszłość</a> </td>
+	<td> <a href="adres/index.html">Kontakt</a> </td>
+  </tr>
+  </table>
+ <h2>
+ Definicja
+ </h2>
+ <p>
+	Żółwie morskie (Cheloniidae) – rodzina gadów z podrzędu żółwi skrytoszyjnych (Cryptodira)
+	obejmująca 6 gatunków występujących
+	w morzach i oceanach strefy subtropikalnej
+	i tropikalnej kuli ziemskiej.
+</p>
+</body>
+</html>
